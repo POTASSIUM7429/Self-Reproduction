@@ -6,55 +6,41 @@
 #include <string>
 
 using namespace std;
-#define times 10
-char   path_buffer[_MAX_PATH];
-char   drive[_MAX_DRIVE];
-char   dir[_MAX_DIR];
-char   fname[_MAX_FNAME];
-char   ext[_MAX_EXT];
 
 int main(int argc,char *argv[])
 {
-	
-	//int times = stoi(argv[2], nullptr, 10);
+	/*copy1.exe filename times */
+	//cmd中输入V:切换盘符之后调整路径
+	if (argc != 3)
+	{
+		cout << "Usage: Filename\tCopyTimes"<<endl;
+		system("Pause");
+		return 0;
+	}
+	int times = stoi(argv[2], nullptr, 10);
 	cout << "Times Comfirmation:" << times << endl;
 	int i;
 	string filename;
-	char base1[50];
-	_splitpath_s(argv[0], drive, dir, base1, ext);
 	char base []= "copy";
-	char fg[] = ".exe";
-	char base2[] = "copy";
-	char base3[] = ".exe";
-	char routue[] = ".\\datapan\\";
-	char command[100];
+	char base1[] = ".exe";
+	char base2[] = " ..\\..\\panbase\\";
+	char command[50];
 	char order[5];
-	system("mkdir datapan");
 	for (i = 2; i < times+2; i++)
 	{
-	
-
 		 _itoa_s(i, order, 10);
-		 strcat_s(order,"\0");
-		 cout << "Now Copying :" << i <<endl;
-		 
+		 cout << "Now Copying :" << i << endl;
 		 strcpy_s(command, base);
 		 strcat_s(command, " ");
-		 strcat_s(command,base1);
-		 strcat_s(command, fg);
+		 strcat_s(command,argv[1]);
 		 strcat_s(command, " ");
-		 strcat_s(command, routue);
-		 strcat_s(command, base2);
+		 strcat_s(command, base);
 		 strcat_s(command, order);
-		 strcat_s(command, base3);
-		 //strcat_s(command, " ");
-		 
-		 cout << command << endl;
+		 strcat_s(command, base1);
 		 system(command);
 		 cout << "Copy Finished" << order << endl;
 	}
 	cout <<"Finished" << endl;
-	system("Pause");
 	return 0;
 
 
